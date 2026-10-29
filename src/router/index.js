@@ -7,6 +7,10 @@ import {
 } from 'vue-router'
 
 import routes from './routes.js'
+// import { useAuthStore } from '@/stores/authStore.js'
+// import { useAuthStore } from '@/stores/auth-store.js'
+// import { Notify } from 'quasar'
+
 
 /*
  * If not building with SSR mode, you can
@@ -33,6 +37,66 @@ export default defineRouter((/* { store, ssrContext } */) => {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(import.meta.env.QUASAR_VUE_ROUTER_BASE),
   })
+
+  // Router.beforeEach((to, from, next) => {
+  //   const authStore = useAuthStore()
+  //   if (!authStore.isLoggedIn && to.path !== '/login') {
+  //     next('/login')
+  //   } else {
+  //     next()
+  //   }
+  // })
+
+  // Router.beforeEach((to, from, next) => {
+  //   const authStore = useAuthStore()
+  //   console.log(to.meta.requiresAuth)
+  //   if (to.meta.requireAuth && !authStore.isLoggedIn) {
+  //     next('/login')
+  //   } else {
+  //     next()
+  //   }
+  // })
+
+  //   Router.beforeEach((to, from, next) => {
+  //   const authStore = useAuthStore()
+  //   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+  //     Notify.create({
+  //       type: 'warning',
+  //       message: 'Please login first.'
+  //     })
+  //     next({ name: 'login' })
+  //   } else {
+  //     next()
+  //   }
+  // })
+  // Router.beforeEach((to, from, next) => {
+  //   const authStore = useAuthStore()
+  //   console.log("role: " + authStore.role)
+  //   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+  //     Notify.create({
+  //       type: 'warning',
+  //       message: 'Please login first.'
+  //     })
+  //     return next({ name: 'login' })
+  //   }
+
+  //   if (to.meta.roles && !to.meta.roles.includes(authStore.role)) {
+  //     Notify.create({
+  //       type: 'negative',
+  //       message: 'You do not have permission to access this page.'
+  //     })
+
+  //     switch (authStore.role) {
+  //       case 'admin':
+  //         return next({ name: 'admin' })
+  //       case 'teacher':
+  //         return next({ name: 'teacher' })
+  //       default:
+  //         return next({ name: 'profile' })
+  //     }
+  //   }
+  //   next()
+  // })
 
   return Router
 })

@@ -6,7 +6,11 @@
 
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- <div>Quasar v{{ $q.version }}</div> -->
+        <div v-if="authStore.user">
+          <q-btn size="sm" color="negative" icon="logout" label="Logout" @click="onLogout" />
+        </div>
+
       </q-toolbar>
     </q-header>
 
@@ -27,6 +31,30 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from '@/components/EssentialLink.vue'
+import { useRouter } from 'vue-router'
+import { useQuasar } from 'quasar'
+import { useAuthStore } from '@/stores/auth-store'
+
+const router = useRouter()
+const $q = useQuasar()
+const authStore = useAuthStore()
+
+const onLogout = () => {
+  $q.dialog({
+    title: 'Logout',
+    message: 'Are you sure you want to logout?',
+    cancel: true,
+    persistent: true
+  }).onOk(() => {
+    authStore.logout()
+    $q.notify({
+      type: 'positive',
+      message: 'Logout successful.'
+    })
+    router.replace({ name: 'login' })
+  })
+}
+
 
 const linksList = [
   {
